@@ -2,7 +2,7 @@ const Post = require('../data/models/post.js');
 
 module.exports = function (app) {
 
-  // display posts
+  // display all posts
   app.get('/', async (req, res) => {
     try {
       const posts = await Post.find({}).lean();
@@ -12,7 +12,16 @@ module.exports = function (app) {
       console.log(err.message);
     }
   });
-  
+
+  // display one post
+  app.get('/posts/:id', (req, res) => {
+    Post.findById(req.params.id).lean()
+      .then((post) => res.render('posts-show', { post }))
+      .catch((err) => {
+        console.log(err.message);
+      });
+  });
+
 
   // CREATE
   app.get('/posts/new', (req, res) => {
