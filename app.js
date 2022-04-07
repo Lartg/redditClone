@@ -24,11 +24,16 @@ app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 
 const jwt = require('jsonwebtoken');
 
-require('./controllers/feed')(app);
+// Set db
+require('./data/reddit-db');
+
+// set routes
+require('./controllers/posts')(app);
 
 const port = process.env.PORT || 3000;
 
