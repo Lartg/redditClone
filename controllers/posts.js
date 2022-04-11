@@ -3,15 +3,11 @@ const Post = require('../data/models/post.js');
 module.exports = function (app) {
 
   // display all posts
-  app.get('/', async (req, res) => {
-    try {
-      const posts = await Post.find({}).lean();
-      console.log(posts)
-      return res.render('posts-index', { posts });
-    } catch (err) {
-      console.log(err.message);
-    }
-  });
+  app.get('/', (req, res) => {
+    Post.find().then((posts) => res.render('posts-index', { posts })).catch((err) => {
+        console.log(err.message);
+      })
+  })
 
   // display one post
   app.get('/posts/:id', (req, res) => {
