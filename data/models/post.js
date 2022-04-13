@@ -6,6 +6,7 @@ const postSchema = new Schema({
   title: { type: String, required: true },
   url: { type: String, required: false },
   summary: { type: String, required: true },
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
   subreddit: { type: String, required: true }
 });
 

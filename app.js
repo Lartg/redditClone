@@ -35,6 +35,7 @@ require('./data/reddit-db');
 
 // set routes
 require('./controllers/posts')(app);
+require('./controllers/comments.js')(app);
 
 const port = process.env.PORT || 3000;
 

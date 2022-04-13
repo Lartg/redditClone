@@ -12,8 +12,8 @@ module.exports = function (app) {
   })
 
   // display one post
-  app.get('/posts/view/:id', (req, res) => {
-    Post.findById(req.params.id).lean()
+  app.get('/posts/show/:id', (req, res) => {
+    Post.findById(req.params.id).lean().populate('comments')
       .then((post) => res.render('posts-show', { post }))
       .catch((err) => {
         console.log(err.message);
@@ -30,15 +30,16 @@ module.exports = function (app) {
     post.save();
     res.redirect('/')
   });
-}
-// UPDATE
-// DESTROY
 
-// SUBREDDIT
-// app.get('/n/:subreddit', (req, res) => {
-//   Post.find({ subreddit: req.params.subreddit }).lean()
-//     .then((posts) => res.render('posts-index', { posts }))
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
+  // UPDATE
+  // DESTROY
+
+  // SUBREDDIT
+  app.get('/n/:subreddit', (req, res) => {
+    Post.find({ subreddit: req.params.subreddit }).lean()
+      .then((posts) => res.render('posts-index', { posts }))
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+}
