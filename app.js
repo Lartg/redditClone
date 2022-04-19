@@ -1,5 +1,7 @@
 // Require Libraries
+const env = require('dotenv').config();
 const fetch = import('node-fetch');
+const cookieParser = require('cookie-parser');
 const express = require('express');
 const methodOverride = require('method-override')
 const Handlebars = require('handlebars')
@@ -8,7 +10,7 @@ const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-acce
 const bodyParser = require('body-parser');
 
 
-const cookieParser = require('cookie-parser');
+
 
 const app = express();
 
@@ -20,6 +22,7 @@ app.engine('handlebars', engine({
 }));
 app.set('view engine', 'handlebars');
 app.set('views', './views');
+app.use(cookieParser());
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
 app.use(cookieParser());
@@ -34,6 +37,7 @@ const jwt = require('jsonwebtoken');
 require('./data/reddit-db');
 
 // set routes
+require('./controllers/auth')(app);
 require('./controllers/posts')(app);
 require('./controllers/comments.js')(app);
 
