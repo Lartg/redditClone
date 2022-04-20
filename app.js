@@ -41,6 +41,7 @@ require('./data/reddit-db');
 require('./controllers/auth')(app);
 require('./controllers/posts')(app);
 require('./controllers/comments.js')(app);
+require('./controllers/replies.js')(app);
 
 const port = process.env.PORT || 3000;
 
