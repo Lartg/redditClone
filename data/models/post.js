@@ -4,6 +4,7 @@ const { Schema, model } = require('mongoose');
 
 const postSchema = new Schema({
   title: { type: String, required: true },
+  author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   url: { type: String, required: false },
   summary: { type: String, required: true },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],

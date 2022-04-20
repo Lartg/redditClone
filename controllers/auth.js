@@ -21,7 +21,7 @@ module.exports = app => {
       });
   });
   // LOGIN FORM
-  app.get('/login', (req, res) => res.render('login'));
+  app.get('/login', (req, res) => res.render('login.handlebars'));
   // LOGIN
   app.post('/login', (req, res) => {
     const { username, password } = req.body;

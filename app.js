@@ -8,7 +8,7 @@ const Handlebars = require('handlebars')
 const expressHandlebars = require('express-handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 const bodyParser = require('body-parser');
-
+const checkAuth = require('./middleware/checkAuth');
 
 
 
@@ -28,6 +28,7 @@ app.use(express.static('public'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(checkAuth);
 
 
 const jwt = require('jsonwebtoken');
